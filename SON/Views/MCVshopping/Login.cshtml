@@ -1,0 +1,11 @@
+﻿@model SON.Models.customers
+
+<h2>ลงชื่อเข้าใช้</h2>
+@using (Html.BeginForm())
+{
+    <img src="https://img.in.th/images/a44a36551912eeb091768c498fe5f91c.png" border="0" style="margin-left:10.5%;">
+    <div><label class="control-label col-md-1"></label><input type="text" class="form-control" name="ContactName" placeholder="UserName" /></div><br />
+    <div><label class="control-label col-md-1"></label><input type="password" class="form-control" name="Password" placeholder="Password" /></div>
+    <br />
+    <button type="submit" style="margin-left:7.1%" class="btn btn-danger">ลงชื่อเข้าใช้</button><a href="Regiters" style="margin-left:2%">Register +</a>
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5a9b7b86f7f74b2b9705e650698d144a" Name="Diagram1">
+        <EntityTypeShape EntityType="DatabaseMVCshoppingModel.categories" Width="1.5" PointX="0.75" PointY="1.25" />
+        <EntityTypeShape EntityType="DatabaseMVCshoppingModel.customers" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DatabaseMVCshoppingModel.orderdetails" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="DatabaseMVCshoppingModel.orders" Width="1.5" PointX="3" PointY="5.25" />
+        <EntityTypeShape EntityType="DatabaseMVCshoppingModel.products" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="DatabaseMVCshoppingModel.FK_products_dbo_categories" />
+        <AssociationConnector Association="DatabaseMVCshoppingModel.FK_orderdetails_dbo_orders" />
+        <AssociationConnector Association="DatabaseMVCshoppingModel.FK_orderdetails_dbo_products" />
+        <AssociationConnector Association="DatabaseMVCshoppingModel.FK_orders_ToTable" />
+        <AssociationConnector Association="DatabaseMVCshoppingModel.FK_orders_ToTable_1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

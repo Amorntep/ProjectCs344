@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DatabaseMVCshoppingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DatabaseMVCshoppingEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="categories" EntityType="DatabaseMVCshoppingModel.categories" />
+    <EntitySet Name="customers" EntityType="DatabaseMVCshoppingModel.customers" />
+    <EntitySet Name="orderdetails" EntityType="DatabaseMVCshoppingModel.orderdetails" />
+    <EntitySet Name="orders" EntityType="DatabaseMVCshoppingModel.orders" />
+    <EntitySet Name="products" EntityType="DatabaseMVCshoppingModel.products" />
+    <AssociationSet Name="FK_products_dbo_categories" Association="DatabaseMVCshoppingModel.FK_products_dbo_categories">
+      <End Role="categories" EntitySet="categories" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_orderdetails_dbo_orders" Association="DatabaseMVCshoppingModel.FK_orderdetails_dbo_orders">
+      <End Role="orders" EntitySet="orders" />
+      <End Role="orderdetails" EntitySet="orderdetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_orderdetails_dbo_products" Association="DatabaseMVCshoppingModel.FK_orderdetails_dbo_products">
+      <End Role="products" EntitySet="products" />
+      <End Role="orderdetails" EntitySet="orderdetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_orders_ToTable" Association="DatabaseMVCshoppingModel.FK_orders_ToTable">
+      <End Role="customers" EntitySet="customers" />
+      <End Role="orders" EntitySet="orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_orders_ToTable_1" Association="DatabaseMVCshoppingModel.FK_orders_ToTable_1">
+      <End Role="products" EntitySet="products" />
+      <End Role="orders" EntitySet="orders" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="categories">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="Int32" Nullable="false" />
+    <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="products" Relationship="DatabaseMVCshoppingModel.FK_products_dbo_categories" FromRole="categories" ToRole="products" />
+  </EntityType>
+  <EntityType Name="customers">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ContactName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="orders" Relationship="DatabaseMVCshoppingModel.FK_orders_ToTable" FromRole="customers" ToRole="orders" />
+  </EntityType>
+  <EntityType Name="orderdetails">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="ProuctID" Type="Int32" />
+    <Property Name="UnitPrice" Type="Decimal" Precision="10" Scale="4" />
+    <Property Name="Quantity" Type="Int16" />
+    <Property Name="Discount" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="orders" Relationship="DatabaseMVCshoppingModel.FK_orderdetails_dbo_orders" FromRole="orderdetails" ToRole="orders" />
+    <NavigationProperty Name="products" Relationship="DatabaseMVCshoppingModel.FK_orderdetails_dbo_products" FromRole="orderdetails" ToRole="products" />
+  </EntityType>
+  <EntityType Name="orders">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderDate" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="orderdetails" Relationship="DatabaseMVCshoppingModel.FK_orderdetails_dbo_orders" FromRole="orders" ToRole="orderdetails" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="customers" Relationship="DatabaseMVCshoppingModel.FK_orders_ToTable" FromRole="orders" ToRole="customers" />
+    <Property Name="ProductID" Type="Int32" />
+    <NavigationProperty Name="products" Relationship="DatabaseMVCshoppingModel.FK_orders_ToTable_1" FromRole="orders" ToRole="products" />
+  </EntityType>
+  <EntityType Name="products">
+    <Key>
+      <PropertyRef Name="ProuctID" />
+    </Key>
+    <Property Name="ProuctID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="CategoryID" Type="Int32" />
+    <Property Name="QuantityPerUnit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UnitsInStock" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="categories" Relationship="DatabaseMVCshoppingModel.FK_products_dbo_categories" FromRole="products" ToRole="categories" />
+    <NavigationProperty Name="orderdetails" Relationship="DatabaseMVCshoppingModel.FK_orderdetails_dbo_products" FromRole="products" ToRole="orderdetails" />
+    <NavigationProperty Name="orders" Relationship="DatabaseMVCshoppingModel.FK_orders_ToTable_1" FromRole="products" ToRole="orders" />
+  </EntityType>
+  <Association Name="FK_products_dbo_categories">
+    <End Type="DatabaseMVCshoppingModel.categories" Role="categories" Multiplicity="0..1" />
+    <End Type="DatabaseMVCshoppingModel.products" Role="products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categories">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="products">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_orderdetails_dbo_orders">
+    <End Type="DatabaseMVCshoppingModel.orders" Role="orders" Multiplicity="1" />
+    <End Type="DatabaseMVCshoppingModel.orderdetails" Role="orderdetails" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="orders">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="orderdetails">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_orderdetails_dbo_products">
+    <End Type="DatabaseMVCshoppingModel.products" Role="products" Multiplicity="0..1" />
+    <End Type="DatabaseMVCshoppingModel.orderdetails" Role="orderdetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="ProuctID" />
+      </Principal>
+      <Dependent Role="orderdetails">
+        <PropertyRef Name="ProuctID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_orders_ToTable">
+    <End Type="DatabaseMVCshoppingModel.customers" Role="customers" Multiplicity="0..1" />
+    <End Type="DatabaseMVCshoppingModel.orders" Role="orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customers">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="orders">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_orders_ToTable_1">
+    <End Type="DatabaseMVCshoppingModel.products" Role="products" Multiplicity="0..1" />
+    <End Type="DatabaseMVCshoppingModel.orders" Role="orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="ProuctID" />
+      </Principal>
+      <Dependent Role="orders">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

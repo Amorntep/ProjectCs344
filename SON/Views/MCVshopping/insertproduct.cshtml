@@ -1,0 +1,90 @@
+﻿@model SON.Models.products
+
+@{
+    ViewBag.Title = "insertproduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>เพิ่มข้อมูลสินค้า</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>products</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            <label class="control-label col-md-2">
+                รหัสสินค้า
+            </label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.ProuctID, new { @class = "form-control" })*หมายเลขสินค้า 4 ตัวเท่านั่น
+                @Html.ValidationMessageFor(model => model.ProuctID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">
+                ชื่อสินค้า
+            </label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.ProductName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ProductName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">
+                ราคาสินค้า
+            </label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Price, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Price)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">
+                ประเภทสินค้า
+            </label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.CategoryID, (List<SelectListItem>)ViewBag.list,
+                "เลือกประเภทสินค้า", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CategoryID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">
+                จำนวนสินค้าที่สมารถขายได้
+            </label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.QuantityPerUnit, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.QuantityPerUnit)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">
+                จำนวนสินค้าในคลัง
+            </label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.UnitsInStock, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.UnitsInStock)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

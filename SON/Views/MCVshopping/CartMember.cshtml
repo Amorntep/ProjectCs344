@@ -1,0 +1,53 @@
+﻿@model IEnumerable<SON.Models.orders>
+
+@{
+    ViewBag.Title = "CartMember";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CartMember</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </th>
+        <th>
+            สินค้า
+        </th>
+        <th>
+            ชื่อลูกค้า
+        </th>
+        <th>
+            สถานะ
+        </th>
+        <th>
+            ยกเลิกการสั่ง
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.products.ProductName) <span>ราคา :</span> @Html.DisplayFor(modelItem => item.products.Price) 
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.customers.ContactName)
+        </td>
+        <td>
+            <a> ยังไม่ได้ชำระเงิน</a>
+        </td>
+        <td>
+            @Html.ActionLink("ยกเลิกการสั่ง", "DelCart", new { id = item.OrderID })
+        </td>
+    </tr>
+}
+
+</table>
+@Html.ActionLink("สั่งสินค้าเพิ่ม", "Index")
+<form action="/MCVshopping/Pay" method="get">
+    <button type="submit">ชำระเงิน</button>
+</form>

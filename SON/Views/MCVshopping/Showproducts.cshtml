@@ -1,0 +1,71 @@
+﻿@model IEnumerable<SON.Models.products>
+
+@{
+    ViewBag.Title = "Showproducts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    $(document).ready(function () {
+        var d = new Date();
+
+        var month = d.getMonth() + 1;
+        var day = d.getDate();
+
+        var output = d.getFullYear() + '/' +
+            (month < 10 ? '0' : '') + month + '/' +
+            (day < 10 ? '0' : '') + day;
+        var time = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+        var total = output +" "+ time;
+        $('#date').val(total);
+    });
+</script>
+<table class="table" style="margin-top:5%;">
+    <tr>
+        <th>
+            ชื่อสินค้า
+        </th>
+        <th>
+            ประเภทสินค้า
+        </th>
+        <th>
+            ราคาสินค้า
+        </th>
+        <th>
+            จำนวนที่ซื้อได้
+        </th>
+        <th>
+           จำนวนสินค้าทั้งหมด
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.categories.CategoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuantityPerUnit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitsInStock)
+        </td>
+        <td>
+            <form action="/MCVshopping/CartProduct" method="get">
+                <input type="hidden" name="OrderDate" id="date" />
+                <input type="hidden" name="CustomerID" value="@Session["CustomerID"]" />
+                <input type="hidden" name="status" value="0" />
+                <input type="hidden" name="ProductID" value="@item.ProuctID" />
+                <button type="submit" class="btn btn-primary">ใส่ตะกร้า</button>
+            </form>
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,90 @@
+﻿﻿@model IEnumerable<SON.Models.categories>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Session["Status"] != null)
+{
+    var types = Session["Status"];
+    if (types.Equals(1))
+    {
+        //-------addmin
+        <h2>Admin page</h2>
+
+        <table class="table">
+            <tr>
+                <th>
+                    ประเภทสินค้า
+                </th>
+                <th>
+                    รายละเอียดสินค้า
+                </th>
+                <th>
+                    รูปภาพสินค้า
+                </th>
+                <th>
+                    List
+                </th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        <img src="@item.Picture" />
+                    </td>
+                    <td>
+                        @Html.ActionLink("ดูรายการสินค้า", "", new { id = item.CategoryID }, new { @class = "btn btn-primary" })
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+    <!--Member page-->
+        <h2>รายการสินค้า</h2>
+        <table class="table">
+            <tr>
+                <th>
+                    ประเภทสินค้า
+                </th>
+                <th>
+                    รายละเอียดสินค้า
+                </th>
+                <th>
+                    รูปภาพสินค้า
+                </th>
+                <th>
+                    List
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        <img src="@item.Picture" />
+                    </td>
+                    <td>
+                        @Html.ActionLink("ดูรายการสินค้า", "Showproducts", new { id = item.CategoryID }, new { @class = "btn btn-primary" })
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+}
+
