@@ -210,12 +210,15 @@
     <Content Include="Views\MCVshopping\Login.cshtml" />
     <Content Include="Views\MCVshopping\Regiters.cshtml" />
     <Content Include="Views\MCVshopping\Index.cshtml" />
-    <Content Include="Views\MCVshopping\insertproduct.cshtml" />
     <Content Include="Views\MCVshopping\Showproducts.cshtml" />
     <Content Include="Views\MCVshopping\showmember.cshtml" />
     <Content Include="Views\MCVshopping\CartMember.cshtml" />
     <Content Include="Views\MCVshopping\History.cshtml" />
     <Content Include="Views\MCVshopping\Showbays.cshtml" />
+    <Content Include="Views\MCVshopping\insertproduct.cshtml" />
+    <Content Include="Views\MCVshopping\ProductLists.cshtml" />
+    <Content Include="Views\MCVshopping\EditProduct.cshtml" />
+    <Content Include="Views\MCVshopping\Editmember.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

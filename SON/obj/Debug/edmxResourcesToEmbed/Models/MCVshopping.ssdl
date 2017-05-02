@@ -44,7 +44,7 @@
     <Key>
       <PropertyRef Name="ProuctID" />
     </Key>
-    <Property Name="ProuctID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProuctID" Type="int" Nullable="false" />
     <Property Name="ProductName" Type="varchar" MaxLength="255" />
     <Property Name="Price" Type="varchar" MaxLength="255" />
     <Property Name="CategoryID" Type="int" />

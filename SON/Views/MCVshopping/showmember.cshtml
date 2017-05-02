@@ -5,27 +5,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>showmember</h2>
+<h2>รายชื่อ</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ContactName)
+            ชื่อ
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Address)
+            ที่อยู่
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Phone)
+            หมายเลขโทรศัพท์
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Password)
+            รหัสผู้ใช้งาน
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            สถานะของผู้ใช้
         </th>
         <th></th>
     </tr>
@@ -48,9 +45,8 @@
             @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CustomerID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CustomerID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CustomerID })
+            @Html.ActionLink("แก้ไข", "Editmember", new { id = item.CustomerID }, new { @class = "btn btn-seccess" })
+            @Html.ActionLink("ลบข้อมูล", "Delmem", new { id = item.CustomerID }, new { @class = "btn btn-danger" })
         </td>
     </tr>
 }

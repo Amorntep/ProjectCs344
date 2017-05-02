@@ -13,19 +13,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.OrderDate)
+            วันที่สั่งซื้อ
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.status)
+            สถานะการชำระเงิน
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.orderdetails.Discount)
+            ประเภทของสินค้า
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.customers.ContactName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.products.ProductName)
+            ชื่อสินค้า
         </th>
         <th>
             ที่อยู่
@@ -46,9 +43,6 @@
             {
                 <a href="#">จัดส่งเรียบร้อย</a>
             }
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.orderdetails.Discount)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.customers.ContactName)

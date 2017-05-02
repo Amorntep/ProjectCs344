@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SON.Models.products>
+
+@{
+    ViewBag.Title = "ProductLists";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>รายการสินค้า</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            ชื่อสินค้า
+        </th>
+        <th>
+            ราคาสินค้า
+        </th>
+        <th>
+            จำนวนสินค้า
+        </th>
+        <th>
+            ประเภทของสินค้า
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitsInStock)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.categories.CategoryName)
+        </td>
+        <td>
+            @Html.ActionLink("แก้ไขข้อมูล", "EditProduct", new { id = item.ProuctID })
+            @Html.ActionLink("ลบสินค้า", "Del", new { id = item.ProuctID })
+        </td>
+    </tr>
+}
+    
+</table>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -44,13 +44,26 @@ namespace SON.DAO
         /// 
         /// </summary>
         /// <param name="editProducts"></param>
-        public void Update(products editProducts)
+        public void Update(products product)
         {
-            var productDB = entity.products.Where(x => x.ProuctID == editProducts.ProuctID).FirstOrDefault();
-            productDB.CategoryID = editProducts.CategoryID;
-            productDB.ProductName = editProducts.ProductName;
-            productDB.UnitsInStock = editProducts.UnitsInStock;
-            productDB.Price = editProducts.Price;
+            var productDB = entity.products.Where(x => x.ProuctID == product.ProuctID).FirstOrDefault();
+            productDB.ProductName = product.ProductName;
+            productDB.Price = product.Price;
+            productDB.UnitsInStock = product.UnitsInStock;
+            productDB.categories.CategoryID = product.categories.CategoryID;
+
+
+            entity.Entry(productDB).State = System.Data.EntityState.Modified;
+            entity.SaveChanges();
+        }
+        public void Updatemember(customers customer)
+        {
+            var productDB = entity.customers.Where(x => x.CustomerID == customer.CustomerID).FirstOrDefault();
+            productDB.ContactName = customer.ContactName;
+            productDB.Address = customer.Address;
+            productDB.Phone = customer.Phone;
+            productDB.Password = customer.Password;
+
 
             entity.Entry(productDB).State = System.Data.EntityState.Modified;
             entity.SaveChanges();
@@ -96,7 +109,6 @@ namespace SON.DAO
             list = entity.categories.ToList();
             return list;
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -106,7 +118,10 @@ namespace SON.DAO
         {
             return entity.products.Where(x => x.ProuctID == Productid).FirstOrDefault();
         }
-
+        public customers Getcustomer(int CustomerID)
+        {
+            return entity.customers.Where(x => x.CustomerID == CustomerID).FirstOrDefault();
+        }
 
         public List<categories> Showcategories()
         {
@@ -114,7 +129,16 @@ namespace SON.DAO
             list = entity.categories.ToList();
             return list;
         }
-
+        public List<products> GetProductLists(int id)
+        {
+            List<products> list = new List<products>();
+            list = entity.products.Where(x=>x.CategoryID == id).ToList();
+            return list;
+        }
+        public products GetProductID(int id)
+        {
+            return entity.products.Where(x => x.ProuctID == id).FirstOrDefault();
+        }
 
         public List<products> Showwheyproduct(int productid)
         {
@@ -146,6 +170,18 @@ namespace SON.DAO
             entity.SaveChanges();
         }
         public void DeleteCart(int id)
+        {
+            var dels = entity.orders.Where(x => x.OrderID == id).FirstOrDefault();
+            entity.Entry(dels).State = System.Data.EntityState.Deleted;
+            entity.SaveChanges();
+        }
+        public void Delete(int id)
+        {
+            var dels = entity.products.Where(x => x.ProuctID == id).FirstOrDefault();
+            entity.Entry(dels).State = System.Data.EntityState.Deleted;
+            entity.SaveChanges();
+        }
+        public void DeleteCartHistorys(int id)
         {
             var dels = entity.orders.Where(x => x.OrderID == id).FirstOrDefault();
             entity.Entry(dels).State = System.Data.EntityState.Deleted;

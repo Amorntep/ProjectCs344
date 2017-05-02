@@ -41,7 +41,7 @@
                         <img src="@item.Picture" />
                     </td>
                     <td>
-                        @Html.ActionLink("ดูรายการสินค้า", "", new { id = item.CategoryID }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("ดูรายการสินค้า", "ProductLists", new { id = item.CategoryID }, new { @class = "btn btn-primary" })
                     </td>
                 </tr>
             }

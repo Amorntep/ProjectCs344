@@ -1,0 +1,70 @@
+﻿@model SON.Models.products
+
+@{
+    ViewBag.Title = "EditProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>EditProduct</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>products</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ProuctID)
+
+        <div class="form-group">
+            <label class="control-label col-md-2">
+                ชื่อสินค้า
+            </label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.ProductName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ProductName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">
+                จำนวนสินค้า
+            </label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.UnitsInStock, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.UnitsInStock)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">
+                ราคาสินค้า
+            </label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Price, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Price)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">
+                จำนวนต่อหน่วย
+            </label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.CategoryID, (List<SelectListItem>)ViewBag.list,
+                "เลือกประเภทสินค้า", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CategoryID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
